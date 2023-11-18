@@ -57,10 +57,10 @@ const router = createRouter({
       children: [
         { path: '', component: () => import('../components/album/AlbumList.vue') },
         { path: 'crear', component: () => import('../components/album/AlbumCreate.vue') },
-        {
+       // {
           //path: 'editar/:id',
           //component: () => import('../components/album/AlbumEdit.Vue')
-        }
+        //}
       ]
     }
   ]
