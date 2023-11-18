@@ -58,8 +58,8 @@ const router = createRouter({
         { path: '', component: () => import('../components/album/AlbumList.vue') },
         { path: 'crear', component: () => import('../components/album/AlbumCreate.vue') },
         {
-          path: 'editar/:id',
-          component: () => import('../components/album/AlbumEdit.Vue')
+          //path: 'editar/:id',
+          //component: () => import('../components/album/AlbumEdit.Vue')
         }
       ]
     }
