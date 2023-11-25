@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
+import LoginView from '@/views/LoginView.vue'
 import { useAuthStore } from '@/stores'
 import { getTokenFromLocalStorage } from '@/helpers'
 
@@ -14,60 +14,109 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/pedido',
+      name: 'pedido',
+      component: () => import('../views/PedidoView.vue'),
+      children: [
+        { path: '', component: () => import('../components/pedido/PedidoList.vue') },
+        { path: 'crear', component: () => import('../components/pedido/PedidoCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/pedido/PedidoEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/platillos', //direccion del swagger
+      name: 'platillos',
+      component: () => import('../views/PlatilloView.vue'),
+      children: [
+        { path: '', component: () => import('../components/platillo/PlatilloList.vue') },
+        { path: 'crear', component: () => import('../components/platillo/PlatilloCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/platillo/PlatilloEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/pago', //direccion del swagger
+      name: 'pago',
+      component: () => import('../views/PagoView.vue'),
+      children: [
+        { path: '', component: () => import('../components/pago/PagoList.vue') },
+        { path: 'crear', component: () => import('../components/pago/PagoCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/pago/PagoEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/detalles', //direccion del swagger
+      name: 'detalles',
+      component: () => import('../views/DetalleView.vue'),
+      children: [
+        { path: '', component: () => import('../components/detalle/DetalleList.vue') },
+        { path: 'crear', component: () => import('../components/detalle/DetalleCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/detalle/DetalleEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/repartidor', //direccion del swagger
+      name: 'repartidor',
+      component: () => import('../views/RepartidorView.vue'),
+      children: [
+        { path: '', component: () => import('../components/repartidor/RepartidorList.vue') },
+        { path: 'crear', component: () => import('../components/repartidor/RepartidorCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/repartidor/RepartidorEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/valoraciones', //direccion del swagger
+      name: 'valoraciones',
+      component: () => import('../views/ValoracionView.vue'),
+      children: [
+        { path: '', component: () => import('../components/valoracion/ValoracionList.vue') },
+        { path: 'crear', component: () => import('../components/valoracion/ValoracionCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/valoracion/ValoracionEdit.vue')
+        }
+      ]
+    },
+    {
+      path: '/usuarios', //direccion del swagger
+      name: 'usuarios',
+      component: () => import('../views/UsuarioView.vue'),
+      children: [
+        { path: '', component: () => import('../components/usuario/UsuarioList.vue') },
+        { path: 'crear', component: () => import('../components/usuario/UsuarioCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/usuario/UsuarioEdit.vue')
+        }
+      ]
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
-    },
-    {
-      path: '/interpretes',
-      name: 'interpretes',
-      component: () => import('../views/InterpreteView.vue'),
-      children: [
-        { path: '', component: () => import('../components/interprete/InterpreteList.vue') },
-        {
-          path: 'crear',
-          component: () => import('../components/interprete/InterpreteCreate.vue')
-        },
-        {
-          path: 'editar/:id',
-          component: () => import('../components/interprete/InterpreteEdit.vue')
-        }
-      ]
-    },
-    {
-      path: '/generos',
-      name: 'generos',
-      component: () => import('../views/GeneroView.vue'),
-      children: [
-        { path: '', component: () => import('../components/genero/GeneroList.vue') },
-        { path: 'crear', component: () => import('../components/genero/GeneroCreate.vue') },
-        {
-          path: 'editar/:id',
-          component: () => import('../components/genero/GeneroEdit.vue')
-        }
-      ]
-    },
-    {
-      path: '/albunes',
-      name: 'albunes',
-      component: () => import('../views/AlbumView.vue'),
-      children: [
-        { path: '', component: () => import('../components/album/AlbumList.vue') },
-        { path: 'crear', component: () => import('../components/album/AlbumCreate.vue') },
-       // {
-          //path: 'editar/:id',
-          //component: () => import('../components/album/AlbumEdit.Vue')
-        //}
-      ]
     }
   ]
 })
 
 router.beforeEach(async (to) => {
-  const publicPages = ['/', '/about' , '/login']
+  const publicPages = ['/', '/login']
   const authRequired = !publicPages.includes(to.path)
   const authStore = useAuthStore()
 
